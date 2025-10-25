@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-control" content="public">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="preload" href="cdn/WOFF/FreeSerif-YO4a.woff" as="font" type="font/woff">
+<link rel="preload" href="cdn/WOFF/jackeyfont.woff" as="font" type="font/woff">
+<link rel="preload" href="crt.css" as="style">
+<link rel="preload" href="desktop.css" as="style">
+<link rel="stylesheet" href="desktop.css">
+<link rel="stylesheet" href="https://unpkg.com/98.css">
+<link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="cdn/js/index.js"></script>
+<script src="cdn/js/audio.js"></script>
+<script src="cdn/js/GetA.js"></script>
+<script src="cdn/js/Shield.js"></script>
+<title>「Shield」</title>
+<meta name="theme-color" content="#000">
+<meta property="og:title" content="「Shield」" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="$SLD$" />
+<meta property="og:url" content="https://fights.cfd">
+<link rel="icon" href="imgs/favicon.ico">
+<style>
+.rounded-img { border-radius: 50%; }
+.glitch { display: inline-block; position: relative; }
+.glitch span { position: absolute; top: 0; left: 0; }
+</style>
+</head>
+<body>
+<script>
+$(function() {
+  $(".draggable").draggable({ start: function() {
+    $(this).css({ transform:"none", top:$(this).offset().top+"px", left:$(this).offset().left+"px" });
+  }});
+});
+
+const userPasswords = {
+  dismayings:"D!s9aY#7vR8kZq2M",
+  akane:"A!k4nE#6pR2vXq1Z",
+  zurf:"Z!u7rF#2pL9xTq8",
+  turk:"T!u6rK#3vP8zQw1",
+  demise:"D!e5mI#2sA8qRz7",
+  gothic:"G!o7tH#2iC9kQx4"
+};
+
+let users = [
+  {username:"dismayings", display_name:"dismayings", profile_picture:"https://files.catbox.moe/nfwlfl.png", bio:"A mysterious figure in the digital realm."},
+  {username:"turk", display_name:"TuRk", profile_picture:"https://files.catbox.moe/odxzi6.png", bio:"A mysterious figure in the digital realm."},
+  {username:"akane", display_name:"akane", profile_picture:"https://files.catbox.moe/nlsbjl.png", bio:"A mysterious figure in the digital realm."},
+  {username:"zurf", display_name:"zurf", profile_picture:"https://files.catbox.moe/vx0tpn.png", bio:"A mysterious figure in the digital realm."},
+  {username:"demise", display_name:"demise", profile_picture:"https://files.catbox.moe/6092n9.png", bio:"A mysterious figure in the digital realm."},
+  {username:"gothic", display_name:"gothic", profile_picture:"https://files.catbox.moe/cdg3go.png", bio:"A mysterious figure in the digital realm."}
+];
+
+let selectedUser = null;
+let loggedInUser = localStorage.getItem("loggedInUser") || null;
+
+function showUserPopup(user) {
+  selectedUser = user;
+  renderPopup();
+}
+
+function renderPopup() {
+  $("#userPopup").remove();
+  if (!selectedUser) return;
+  const isLoggedIn = loggedInUser === selectedUser.username;
+  const html = `
+    <div id="userPopup" style="position:fixed; inset:0; display:flex; justify-content:center; align-items:center; z-index:50;">
+      <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5)" onclick="closePopup()"></div>
+      <div style="position:relative; background:#ccc; border:2px solid #888; width:320px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; background:linear-gradient(to right,#0b3df6,#0ea0f6); padding:4px;">
+          <span style="color:#fff; font-weight:bold">${selectedUser.display_name}</span>
+          <button onclick="closePopup()" style="background:#ccc;border:1px solid #666;width:20px;height:20px;">×</button>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:12px;">
+          <img src="${selectedUser.profile_picture}" class="rounded-img" width="96" height="96">
+          <p style="text-align:center;color:black;">${selectedUser.bio}</p>
+          ${isLoggedIn ? `
+            <button onclick="editField('pfp')" style="padding:4px;">Change PFP</button>
+            <button onclick="editField('bio')" style="padding:4px;">Change Bio</button>
+          ` : `<button onclick="showPasswordForm()" style="padding:4px;">Login</button>`}
+          <button onclick="closePopup()" style="padding:4px;">OK</button>
+        </div>
+      </div>
+    </div>
+  `;
+  $("body").append(html);
+}
+
+function closePopup() { selectedUser=null; $("#userPopup").remove(); }
+
+function showPasswordForm() {
+  const html = `
+    <div id="userPopup" style="position:fixed; inset:0; display:flex; justify-content:center; align-items:center; z-index:50;">
+      <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5)" onclick="closePopup()"></div>
+      <div style="position:relative; background:#ccc; border:2px solid #888; width:320px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; background:linear-gradient(to right,#0b3df6,#0ea0f6); padding:4px;">
+          <span style="color:#fff; font-weight:bold">Login - ${selectedUser.display_name}</span>
+          <button onclick="closePopup()" style="background:#ccc;border:1px solid #666;width:20px;height:20px;">×</button>
+        </div>
+        <div style="margin-top:12px; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <input type="password" id="passwordInput" placeholder="Password" style="width:100%; padding:4px;">
+          <button onclick="submitPassword()" style="padding:4px;">Submit</button>
+          <p id="passwordError" style="color:red; font-size:12px;"></p>
+        </div>
+      </div>
+    </div>
+  `;
+  $("#userPopup").remove();
+  $("body").append(html);
+}
+
+function submitPassword() {
+  const pw = $("#passwordInput").val();
+  if (pw === userPasswords[selectedUser.username]) {
+    loggedInUser = selectedUser.username;
+    localStorage.setItem("loggedInUser", loggedInUser);
+    closePopup();
+    renderPopup();
+  } else {
+    $("#passwordError").text("Incorrect password");
+  }
+}
+
+function editField(field) {
+  const currentValue = field === "pfp" ? selectedUser.profile_picture : selectedUser.bio;
+  const newVal = prompt(`Edit ${field}`, currentValue);
+  if (newVal !== null) {
+    if (field==="pfp") selectedUser.profile_picture=newVal;
+    else selectedUser.bio=newVal;
+    renderPopup();
+  }
+}
+
+function renderDesktopIcons() {
+  users.forEach(u=>{
+    const btn = $('<button></button>').text(u.display_name).css({margin:'4px'}).click(()=>showUserPopup(u));
+    $("body").append(btn);
+  });
+}
+
+$(function(){
+  renderDesktopIcons();
+});
+</script>
+
+<audio id="audio" preload="none" tabindex="0">
+  <source src="songs/Thats life tough you get sick and die.mp3" data-track-number="0" />
+  <source src="songs/audio.mp3" data-track-number="1" />
+  <source src="songs/audio2.mp3" data-track-number="2" />
+  <source src="songs/audio3.mp3" data-track-number="3" />
+  <source src="songs/audio4.mp3" data-track-number="4" />
+</audio>
+
+<ul id="trackList" style="display: none;">
+  <li data-track-number="0">Thats life tough you get sick and die - WifiSkeleton</li>
+  <li data-track-number="1">Lil Double 0 - Life</li>
+  <li data-track-number="2">Poorstacy - Don't Look at Me</li>
+  <li data-track-number="3">Let's Pretend? - DC The Don</li>
+  <li data-track-number="4">UnoTheActivist - All I'm Sayin'</li>
+</ul>
+
+<div class="window volume" id="volume" style="position: fixed; width: 200px; display: none;">
+  <div class="title-bar">
+    <div class="title-bar-text">Volume</div>
+  </div>
+  <div class="window-body">
+    <p> Currently playing:</p>
+    <ul id="songInfo">
+      <li id="songTitle">Thats life tough you get sick and die - WifiSkeleton</li>
+      <li id="songTime">0:00</li>
+      <li><input id="range26" type="range" min="0" max="50" value="50" /></li>
+    </ul>
+  </div>
+  <div class="status-bar">
+    <p id="backward" class="status-bar-field fa-solid fa-backward"></p>
+    <p id="pause" class="status-bar-field fa-solid fa-pause"></p>
+    <p id="forward" class="status-bar-field fa-solid fa-forward"></p>
+  </div>
+</div>
+
+<div class="toolbar-separator"></div>
+<div class="toolbar-right field-row" style="width: 106px;">
+  <img src="imgs/sound.jpg" alt="Tab" onclick="togglePopup('volume')" height="24" width="">
+  <div class="time"><span class="hour"></span>:<span class="minutes"></span> AM</div>
+</div>
+
+<script>
+  const audio = document.getElementById("audio");
+  const trackList = document.getElementById("trackList").children;
+  const songTitle = document.getElementById("songTitle");
+  const songTime = document.getElementById("songTime");
+  const range26 = document.getElementById("range26");
+
+  let currentTrack = 0;
+
+  function playTrack(index) {
+    currentTrack = index;
+    audio.src = audio.querySelector(`[data-track-number="${index}"]`).src;
+    songTitle.textContent = trackList[index].textContent;
+    audio.play();
+  }
+
+  audio.addEventListener("timeupdate", () => {
+    const minutes = Math.floor(audio.currentTime / 60);
+    const seconds = Math.floor(audio.currentTime % 60).toString().padStart(2, "0");
+    songTime.textContent = `${minutes}:${seconds}`;
+  });
+
+  range26.addEventListener("input", () => {
+    audio.volume = range26.value / 50;
+  });
+
+  document.getElementById("backward").addEventListener("click", () => {
+    currentTrack = (currentTrack - 1 + trackList.length) % trackList.length;
+    playTrack(currentTrack);
+  });
+
+  document.getElementById("forward").addEventListener("click", () => {
+    currentTrack = (currentTrack + 1) % trackList.length;
+    playTrack(currentTrack);
+  });
+
+  document.getElementById("pause").addEventListener("click", () => {
+    if (audio.paused) audio.play();
+    else audio.pause();
+  });
+
+  function togglePopup(id) {
+    const popup = document.getElementById(id);
+    popup.style.display = popup.style.display === "none" ? "block" : "none";
+  }
+
+  window.addEventListener("load", () => {
+    playTrack(0);
+    setInterval(() => {
+      const now = new Date();
+      const hourElem = document.querySelector(".hour");
+      const minElem = document.querySelector(".minutes");
+      hourElem.textContent = (now.getHours() % 12 || 12).toString().padStart(2, "0");
+      minElem.textContent = now.getMinutes().toString().padStart(2, "0");
+    }, 1000);
+  });
+</script>
