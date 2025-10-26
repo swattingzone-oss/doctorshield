@@ -63,9 +63,9 @@ function showPopup(popupId) {
       button.addEventListener('click', function() {
         counter++;
         if (counter % 2 === 1) {
-          desktop.style.backgroundImage = 'url(./images/6rfx2s.gif)';
+          desktop.style.backgroundImage = 'url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/6rfx2s.gif)';
         } else {
-          desktop.style.backgroundImage = 'url(./images/axam5m.gif)';
+          desktop.style.backgroundImage = 'url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs//axam5m.gif)';
         }
       });
     });
