@@ -39,14 +39,14 @@ img {
 
 @font-face {
     font-family: "Free Serif";
-    src: url(cdn/WOFF/FreeSerif-YO4a.woff);
+    src: url(./cdn/WOFF/FreeSerif-YO4a.woff);
 }
 
 h1 { font-family: "Free Serif"; }
 
 @font-face {
     font-family: Jackeyfont;
-    src: url(cdn/WOFF/jackeyfont.woff);
+    src: url(./cdn/WOFF/jackeyfont.woff);
 }
 
 a, p { font-family: Jackeyfont; }
