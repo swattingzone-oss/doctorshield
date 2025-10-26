@@ -43,7 +43,7 @@
     cursor: pointer;
     position: fixed;
     text-align: center;
-    background-image: url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/6rfx2s.gif);
+    background-image: url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/black-background-black-waves-d8fbav58488h6bog.gif);
     background-size: cover;
     background-repeat: no-repeat;
   
@@ -55,7 +55,7 @@
   }
   
   #desktop {
-    background-image: url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/6rfx2s.gif);
+    background-image: url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/black-background-black-waves-d8fbav58488h6bog.gif);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -316,12 +316,12 @@
   
   @media only screen and (max-width: 600px) {
     #enter {
-        background-image: url("https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/axam5m.gif.png");
+        background-image: url("https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/dawn.png");
         z-index: 1;
     }
   
     #desktop {
-        background-image: url("https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/axam5m.gif.png");
+        background-image: url("https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/dawn.png");
         z-index: 1;
     }
   
