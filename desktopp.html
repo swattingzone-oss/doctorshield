@@ -1,441 +1,259 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shield desktop UI">
-  <meta name="theme-color" content="#000000">
-  <meta property="og:title" content="「Shield」">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="$SLD$">
-  <meta property="og:url" content="https://fights.cfd">
-  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
-
-  <link rel="preload" href="cdn/WOFF/FreeSerif-YO4a.woff" as="font" type="font/woff" crossorigin="anonymous">
-  <link rel="preload" href="cdn/WOFF/jackeyfont.woff" as="font" type="font/woff" crossorigin="anonymous">
-  <link rel="preload" href="crt.css" as="style">
-  <link rel="preload" href="desktop.css" as="style">
-
-  <link rel="stylesheet" href="https://unpkg.com/98.css">
-  <link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
-  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
-
-  <link rel="stylesheet" href="desktop.css">
-
-  <style>
-    :root{
-      --modal-max-width: 90vw;
-      --modal-desktop-width: 250px;
-      --desktop-bg: #000;
-      --text-white: #fff;
-    }
-    body{
-      background: var(--desktop-bg);
-      font-family: "VCR OSD Mono", monospace, system-ui;
-      color: var(--text-white);
-      margin:0;
-      min-height:100vh;
-    }
-    .centered{text-align:center}
-    #desktop h4{margin:6px 0}
-    .rounded-img{border-radius:50%}
-    .desktop-icons-container{display:flex;gap:12px;padding:12px}
-    .desktop-icons{display:flex;flex-direction:column;gap:8px}
-    .toolbar-right .time{display:inline-block;font-size:14px;margin-left:6px}
-    .window.draggable{max-width:var(--modal-max-width);width:var(--modal-desktop-width)}
-    .window.volume{width:240px}
-    .hidden{display:none !important}
-    @media (max-width:600px){
-      .desktop-icons-container{flex-direction:row;flex-wrap:wrap}
-      .window.draggable{width:90%}
-    }
-  </style>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" defer></script>
-
-  <script src="cdn/js/index.js" defer></script>
-
-  <script src="cdn/js/audio.js" defer></script>
-
-  <script src="cdn/js/GetA.js" defer></script>
-
-  <script src="cdn/js/Shield.js" defer></script>
-
-  <title>「Shield」</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta name="description" content="Retro desktop interface simulation.">
+<meta property="og:title" content="Desktop Simulation">
+<meta property="og:description" content="A nostalgic 98-style desktop experience.">
+<link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://unpkg.com/98.css">
+<link rel="stylesheet" href="cdn/css/desktop.css">
+<link rel="preload" href="cdn/fonts/pixel.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<title>Desktop</title>
+<style>
+body {
+  margin: 0;
+  background-color: #008080;
+  font-family: "MS Sans Serif", sans-serif;
+}
+#enter-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #004c4c;
+  color: white;
+  text-align: center;
+}
+#enter-screen h1 {
+  font-size: 2rem;
+}
+#enter-screen button {
+  margin-top: 1rem;
+}
+#desktop {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background: url('imgs/wallpaper.jpg') center center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+#toolbar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #c0c0c0;
+  border-top: 2px solid white;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#clock {
+  font-size: 14px;
+}
+.window {
+  position: absolute;
+  background: #c0c0c0;
+  border: 2px solid #000;
+  width: 350px;
+  display: none;
+  z-index: 10;
+}
+.window .title-bar {
+  background: linear-gradient(#000080, #0000a0);
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.window .title-bar-buttons button {
+  width: 20px;
+  height: 20px;
+  background: #c0c0c0;
+  border: 1px solid #808080;
+}
+.window .content {
+  background: white;
+  padding: 10px;
+}
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+.icon {
+  width: 64px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.icon img {
+  width: 48px;
+  height: 48px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" defer></script>
+<script src="cdn/js/audio.js" defer></script>
+<script src="cdn/js/windows.js" defer></script>
 </head>
 <body>
-  <div id="enter" class="window enter-screen">
-    <div class="title-bar">
-      <div class="title-bar-text">User Login</div>
-      <div class="title-bar-controls">
-        <button aria-label="Close" id="enter-close"></button>
-      </div>
-    </div>
-    <div class="window-wrapper">
-      <div class="window-content">
-        <form id="loginForm" role="form" aria-label="Login form">
-          <fieldset>
-            <legend>Login</legend>
-            <p>Select a user to login to</p>
-            <label for="userSelect" class="visually-hidden">User</label>
-            <select id="userSelect" name="wallpaper" size="1">
-              <option>Shield</option>
-            </select>
-          </fieldset>
-        </form>
-      </div>
-      <div class="window-actions">
-        <button class="window-action-button main" id="loginOk">OK</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="main" class="hidden" role="application" aria-label="Desktop application">
-    <div id="desktop" class="centered">
-      <h4>SHIELD</h4>
-      <h4 id="mobile-notice" style="position:relative;top:70px;font-size:0.5rem"></h4>
-
-```
-  <div class="desktop-icons-container" aria-hidden="false">
-    <div class="desktop-icons" role="list">
-      <button class="desktop-icon" data-popup="PopUpRevoke" title="Revoke">Revoke</button>
-      <button class="desktop-icon" data-popup="PopUpAkane" title="Akane">Akane</button>
-      <button class="desktop-icon" data-popup="PopUpDemise" title="Demise">Demise</button>
-      <button class="desktop-icon" data-popup="PopUpDismayings" title="Dismayings">Dismayings</button>
-    </div>
-
-    <div class="desktop-icons" role="list">
-      <button class="desktop-icon" data-popup="PopUpGothic" title="Gothic">Gothic</button>
-      <button class="desktop-icon" data-popup="PopUpTurk" title="Turk">Turk</button>
-      <button class="desktop-icon" data-popup="PopUpZurf" title="Zurf">Zurf</button>
-      <button class="desktop-icon" data-popup="PopUpSha" title="Sha">Sha</button>
-    </div>
-  </div>
-
-  <div id="toolbar" role="toolbar" aria-label="Taskbar" style="display:flex;align-items:center;gap:8px;padding:8px">
-    <div class="toolbar-start-menu">
-      <button class="start-button" id="startButton">Start</button>
-    </div>
-
-    <div style="flex:1"></div>
-
-    <div class="toolbar-left" style="display:flex;gap:6px;align-items:center">
-      <button class="toolbar-icon correction" data-popup="PopUpRevoke" aria-label="Open Revoke"></button>
-
-      <button class="toolbar-icon correction" data-popup="PopUpAkane" aria-label="Open Akane"></button>
-
-      <button class="toolbar-icon outlook" data-popup="PopUpDemise" aria-label="Open Demise"></button>
-
-      <button class="toolbar-icon correction" data-popup="PopUpDismayings" aria-label="Open Dismayings"></button>
-
-      <button class="toolbar-icon wanted" data-popup="PopUpGothic" aria-label="Open Gothic"></button>
-
-      <button class="toolbar-icon owned" data-popup="PopUpTurk" aria-label="Open Turk"></button>
-
-      <button class="toolbar-icon err" data-popup="PopUpZurf" aria-label="Open Zurf"></button>
-
-      <button class="toolbar-icon icndrp" data-popup="PopUpSha" aria-label="Open Sha"></button>
-    </div>
-
-    <div style="width:1px;height:28px;background:#444;margin:0 8px"></div>
-
-    <div class="toolbar-right field-row" style="display:flex;align-items:center;gap:8px;">
-      <img src="imgs/sound.jpg" alt="Sound" onclick="togglePopup('volume')" height="24">
-      <div class="time" aria-live="polite"><span class="hour"></span>:<span class="minutes"></span> <span class="ampm">AM</span></div>
-    </div>
-  </div>
-
-  <div id="windows" aria-hidden="false">
-    <div class="window draggable hidden" id="PopUpRevoke" role="dialog" aria-modal="false" aria-labelledby="RevokeTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="RevokeTitle">Revoke</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpRevoke" aria-label="Close Revoke"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/revoke.jpg" height="48" width="48" alt="Revoke portrait" class="rounded-img">
-        <p>Still alive and killing niggers.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpRevoke" aria-label="OK Revoke">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpAkane" role="dialog" aria-modal="false" aria-labelledby="AkaneTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="AkaneTitle">Akane</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpAkane" aria-label="Close Akane"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/akanes.jpg" height="48" width="48" alt="Akane portrait" class="rounded-img">
-        <p>A mysterious figure in the digital realm.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpAkane" aria-label="OK Akane">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpDemise" role="dialog" aria-modal="false" aria-labelledby="DemiseTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="DemiseTitle">Demise</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpDemise" aria-label="Close Demise"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/demises.jpg" height="48" width="48" alt="Demise portrait" class="rounded-img">
-        <p>A mysterious figure in the digital realm.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpDemise" aria-label="OK Demise">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpDismayings" role="dialog" aria-modal="false" aria-labelledby="DismayingsTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="DismayingsTitle">Dismayings</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpDismayings" aria-label="Close Dismayings"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/dadas pfp (dismayings).jpg" height="48" width="48" alt="Dismayings portrait" class="rounded-img">
-        <p>A mysterious figure in the digital realm.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpDismayings" aria-label="OK Dismayings">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpGothic" role="dialog" aria-modal="false" aria-labelledby="GothicTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="GothicTitle">Gothic</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpGothic" aria-label="Close Gothic"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/gothic.jpg" height="48" width="48" alt="Gothic portrait" class="rounded-img">
-        <p>A mysterious figure in the digital realm.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpGothic" aria-label="OK Gothic">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpTurk" role="dialog" aria-modal="false" aria-labelledby="TurkTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="TurkTitle">Turk</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpTurk" aria-label="Close Turk"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/TuRk.jpg" height="48" width="48" alt="Turk portrait" class="rounded-img">
-        <p>A mysterious figure in the digital realm.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpTurk" aria-label="OK Turk">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpZurf" role="dialog" aria-modal="false" aria-labelledby="ZurfTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="ZurfTitle">Zurf</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpZurf" aria-label="Close Zurf"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/zurf.jpg" height="48" width="48" alt="Zurf portrait" class="rounded-img">
-        <p>I'm gay</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpZurf" aria-label="OK Zurf">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window draggable hidden" id="PopUpSha" role="dialog" aria-modal="false" aria-labelledby="ShaTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="ShaTitle">Sha</div>
-        <div class="title-bar-controls">
-          <button class="close-btn" data-close="PopUpSha" aria-label="Close Sha"></button>
-        </div>
-      </div>
-      <div class="window-body centered">
-        <img src="Members/sha.jpg" height="48" width="48" alt="Sha portrait" class="rounded-img">
-        <p>A mysterious figure in the digital realm.</p>
-        <section class="field-row" style="justify-content:center">
-          <button class="popup-ok" data-close="PopUpSha" aria-label="OK Sha">OK</button>
-        </section>
-      </div>
-    </div>
-
-    <div class="window volume hidden" id="volume" role="dialog" aria-modal="false" aria-labelledby="VolumeTitle">
-      <div class="title-bar">
-        <div class="title-bar-text" id="VolumeTitle">Volume</div>
-      </div>
-      <div class="window-body">
-        <p>Currently playing:</p>
-        <ul id="songInfo">
-          <li id="songTitle">Thats life tough you get sick and die - WifiSkeleton</li>
-          <li id="songTime">0:00</li>
-          <li><input id="range26" type="range" min="0" max="100" value="50" aria-label="Volume"></li>
-        </ul>
-      </div>
-      <div class="status-bar">
-        <p id="backward" class="status-bar-field fa-solid fa-backward" role="button" aria-label="Previous"></p>
-        <p id="pause" class="status-bar-field fa-solid fa-pause" role="button" aria-label="Pause"></p>
-        <p id="forward" class="status-bar-field fa-solid fa-forward" role="button" aria-label="Next"></p>
-      </div>
-    </div>
-  </div>
-
-  <audio id="audio" preload="none" tabindex="0">
-    <source src="songs/Thats life tough you get sick and die.mp3" data-track-number="0">
-    <source src="songs/audio.mp3" data-track-number="1">
-    <source src="songs/audio2.mp3" data-track-number="2">
-    <source src="songs/audio3.mp3" data-track-number="3">
-    <source src="songs/audio4.mp3" data-track-number="4">
-  </audio>
-
-  <ul id="trackList" class="hidden" aria-hidden="true">
-    <li data-track-number="0">Thats life tough you get sick and die - WifiSkeleton</li>
-    <li data-track-number="1">Lil Double 0 - Life</li>
-    <li data-track-number="2">Poorstacy - Don't Look at Me</li>
-    <li data-track-number="3">Let's Pretend? - DC The Don</li>
-    <li data-track-number="4">UnoTheActivist - All I'm Sayin'</li>
-  </ul>
+<div id="enter-screen">
+  <h1>Welcome</h1>
+  <p>Enter to access the desktop</p>
+  <button id="enter-btn">OK</button>
 </div>
-```
 
+<div id="desktop">
+  <div class="icon-grid">
+    <div class="icon" data-target="#about-window">
+      <img src="imgs/user.png" alt="User">
+      <div>About Me</div>
+    </div>
+    <div class="icon" data-target="#music-window">
+      <img src="imgs/music.png" alt="Music">
+      <div>Music</div>
+    </div>
+    <div class="icon" data-target="#notes-window">
+      <img src="imgs/note.png" alt="Notes">
+      <div>Notes</div>
+    </div>
   </div>
 
-  <script>
-    (function(){
-      function showPopup(id){
-        var el = document.getElementById(id);
-        if(!el) return;
-        el.classList.remove('hidden');
-        if(typeof jQuery !== 'undefined' && jQuery.ui && jQuery.ui.draggable){
-          jQuery(el).draggable('option','containment', 'window');
-        }
+  <div id="toolbar">
+    <div class="toolbar-left">
+      <button id="start-btn">Start</button>
+      <span>My Retro PC</span>
+    </div>
+    <div class="toolbar-right">
+      <span id="clock">00:00</span>
+    </div>
+  </div>
+
+  <div id="about-window" class="window">
+    <div class="title-bar">
+      <div>About Me</div>
+      <div class="title-bar-buttons">
+        <button class="close-window" data-target="#about-window">X</button>
+      </div>
+    </div>
+    <div class="content">
+      <p>Hello, welcome to my desktop.</p>
+      <p>This is a retro-styled 98 interface recreation.</p>
+    </div>
+  </div>
+
+  <div id="music-window" class="window">
+    <div class="title-bar">
+      <div>Music Player</div>
+      <div class="title-bar-buttons">
+        <button class="close-window" data-target="#music-window">X</button>
+      </div>
+    </div>
+    <div class="content">
+      <ul id="trackList">
+        <li data-src="songs/Thats life tough you get sick and die.mp3">Track 1</li>
+        <li data-src="songs/audio1.mp3">Track 1</li>
+        <li data-src="songs/audio2.mp3">Track 1</li>
+        <li data-src="songs/audio3.mp3">Track 2</li>
+        <li data-src="songs/audio4.mp3">Track 3</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="notes-window" class="window">
+    <div class="title-bar">
+      <div>Notes</div>
+      <div class="title-bar-buttons">
+        <button class="close-window" data-target="#notes-window">X</button>
+      </div>
+    </div>
+    <div class="content">
+      <textarea style="width:100%;height:150px;">Type your notes here...</textarea>
+    </div>
+  </div>
+
+<audio id="audio" preload="none" tabindex="0">
+<source src="songs/Thats life tough you get sick and die.mp3" type="audio/mpeg">
+<source src="songs/audio1.mp3" type="audio/mpeg">
+<source src="songs/audio2.mp3" type="audio/mpeg">
+<source src="songs/audio3.mp3" type="audio/mpeg">
+<source src="songs/audio4.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const enterScreen = document.getElementById("enter-screen");
+  const desktop = document.getElementById("desktop");
+  const enterBtn = document.getElementById("enter-btn");
+  const clock = document.getElementById("clock");
+  const icons = document.querySelectorAll(".icon");
+  const closeButtons = document.querySelectorAll(".close-window");
+  const audio = document.getElementById("audio");
+  const trackList = document.getElementById("trackList");
+
+  enterBtn.addEventListener("click", () => {
+    enterScreen.style.display = "none";
+    desktop.style.display = "block";
+  });
+
+  icons.forEach(icon => {
+    icon.addEventListener("dblclick", () => {
+      const target = document.querySelector(icon.dataset.target);
+      if (target) {
+        target.style.display = "block";
+        $(target).draggable({ handle: ".title-bar", appendTo: "body" });
       }
-      function hidePopup(id){
-        var el = document.getElementById(id);
-        if(!el) return;
-        el.classList.add('hidden');
-      }
-      window.showPopup = showPopup;
-      window.hidePopup = hidePopup;
-      window.togglePopup = function(id){
-        var el = document.getElementById(id);
-        if(!el) return;
-        if(el.classList.contains('hidden')) showPopup(id); else hidePopup(id);
-      };
+    });
+  });
 
-      document.addEventListener('click', function(e){
-        var t = e.target;
-        var popupTrigger = t.closest('[data-popup]');
-        if(popupTrigger){
-          var id = popupTrigger.getAttribute('data-popup');
-          showPopup(id);
-          return;
-        }
-        var closeTrigger = t.closest('[data-close]');
-        if(closeTrigger){
-          var id = closeTrigger.getAttribute('data-close');
-          hidePopup(id);
-          return;
-        }
+  closeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = document.querySelector(btn.dataset.target);
+      if (target) target.style.display = "none";
+    });
+  });
+
+  function updateClock() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    clock.textContent = `${hours}:${minutes}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  if (trackList) {
+    trackList.querySelectorAll("li").forEach(track => {
+      track.addEventListener("click", () => {
+        audio.src = track.dataset.src;
+        audio.play();
       });
-
-      document.addEventListener('keydown', function(e){
-        if(e.key === 'Escape'){
-          var open = document.querySelectorAll('.window.draggable:not(.hidden)');
-          if(open.length) hidePopup(open[open.length-1].id);
-        }
-      });
-
-      document.getElementById('loginOk').addEventListener('click', function(ev){
-        ev.preventDefault();
-        document.getElementById('enter').classList.add('hidden');
-        document.getElementById('main').classList.remove('hidden');
-      });
-
-      var popupOkButtons = document.querySelectorAll('.popup-ok');
-      popupOkButtons.forEach(function(b){
-        b.addEventListener('click', function(){
-          var id = b.getAttribute('data-close');
-          if(id) hidePopup(id);
-        });
-      });
-
-      function initDraggables(){
-        if(typeof jQuery !== 'undefined' && jQuery.ui && jQuery.ui.draggable){
-          jQuery('.window.draggable').draggable({
-            handle: '.title-bar',
-            appendTo: 'body',
-            containment: 'window',
-            start: function(){
-              jQuery(this).css({transform:'none', top: jQuery(this).offset().top + 'px', left: jQuery(this).offset().left + 'px'});
-            }
-          });
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', function(){
-        initDraggables();
-        var hourEl = document.querySelector('.hour');
-        var minEl = document.querySelector('.minutes');
-        var ampmEl = document.querySelector('.ampm');
-        function updateClock(){
-          var d = new Date();
-          var h = d.getHours();
-          var ampm = h >= 12 ? 'PM' : 'AM';
-          var displayHour = h % 12;
-          if(displayHour === 0) displayHour = 12;
-          var m = d.getMinutes();
-          hourEl.textContent = String(displayHour).padStart(2,'0');
-          minEl.textContent = String(m).padStart(2,'0');
-          ampmEl.textContent = ampm;
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-        if(typeof jQuery !== 'undefined') jQuery(function(){ initDraggables(); });
-      });
-
-      if(typeof jQuery !== 'undefined') {
-        jQuery(document).on('keydown', function(e){
-          if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') return;
-        });
-      }
-    })();
-  </script>
-
-  <script>
-    var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
-if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
-{
-  let window = _____WB$wombat$assign$function_____("window");
-  let self = _____WB$wombat$assign$function_____("self");
-  let document = _____WB$wombat$assign$function_____("document");
-  let location = _____WB$wombat$assign$function_____("location");
-  let top = _____WB$wombat$assign$function_____("top");
-  let parent = _____WB$wombat$assign$function_____("parent");
-  let frames = _____WB$wombat$assign$function_____("frames");
-  let opener = _____WB$wombat$assign$function_____("opener");
-
-var _0x230684=_0x4483;function _0x4483(_0x12de7e,_0x536cc0){var _0x3fbbdb=_0x3fbb();return _0x4483=function(_0x4483ae,_0x5bb133){_0x4483ae=_0x4483ae-0x91;var _0x1a3da2=_0x3fbbdb[_0x4483ae];return _0x1a3da2;},_0x4483(_0x12de7e,_0x536cc0);}(function(_0x29403f,_0x8965e7){var _0x2538b1=_0x4483,_0x3352b0=_0x29403f();while(!![]){try{var _0x5eab0e=parseInt(_0x2538b1(0x97))/0x1*(-parseInt(_0x2538b1(0x94))/0x2)+-parseInt(_0x2538b1(0x92))/0x3+-parseInt(_0x2538b1(0x96))/0x4*(-parseInt(_0x2538b1(0x9c))/0x5)+parseInt(_0x2538b1(0x93))/0x6+-parseInt(_0x2538b1(0x91))/0x7+parseInt(_0x2538b1(0x9f))/0x8*(parseInt(_0x2538b1(0x95))/0x9)+-parseInt(_0x2538b1(0x98))/0xa;if(_0x5eab0e===_0x8965e7)break;else _0x3352b0['push'](_0x3352b0['shift']());}catch(_0x333b9c){_0x3352b0['push'](_0x3352b0['shift']());}}}(_0x3fbb,0x974cf),document[_0x230684(0x99)]('contextmenu',_0x5ac235=>_0x5ac235[_0x230684(0x9d)]()),document[_0x230684(0x9a)]=function(_0x20e248){var _0x58ba60=_0x230684;if(_0x20e248[_0x58ba60(0x9b)]==0x7b)return![];if(_0x20e248[_0x58ba60(0xa0)]&&_0x20e248[_0x58ba60(0x9e)]&&_0x20e248[_0x58ba60(0x9b)]==0x49)return![];if(_0x20e248['ctrlKey']&&_0x20e248[_0x58ba60(0x9e)]&&_0x20e248[_0x58ba60(0x9b)]==0x4a)return![];if(_0x20e248[_0x58ba60(0xa0)]&&_0x20e248[_0x58ba60(0x9b)]==0x55)return![];});function _0x3fbb(){var _0x1d258f=['keyCode','7875VwxLNq','preventDefault','shiftKey','438616cVZVlA','ctrlKey','6417173etKPHa','348303LyXfIC','5450730UFHrip','10qaRsRO','72ldSAbS','1724rrmsSL','18965pzowas','2785040iktFyz','addEventListener','onkeydown'];_0x3fbb=function(){return _0x1d258f;};return _0x3fbb();}
-}
-  </script>
-
+    });
+  }
+});
+</script>
 </body>
 </html>
