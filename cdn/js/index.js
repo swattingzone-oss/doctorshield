@@ -29,13 +29,14 @@ function showPopup(popupId) {
   }
   
   document.addEventListener("DOMContentLoaded", function () {
-    addPopupListeners("PopUpAkane", "AkaneClose", "AkaneOK");
-    addPopupListeners("PopUpDemise", "DemiseClose", "DemiseOK");
-    addPopupListeners("PopUpDismayings", "DismayingsClose", "DismayingsOK");
-    addPopupListeners("PopUpGothic", "GothicClose", "GothicOK");
-    addPopupListeners("PopUpTurk", "TurkClose", "TurkOK");
-    addPopupListeners("PopUpZurf", "ZurfClose", "ZurfOK");
-    addPopupListeners("PopUpSha", "ShaClose", "ShaOK");
+    addPopupListeners("PopUpNov", "NovClose", "NovOK");
+    addPopupListeners("PopUpReiko", "ReikoClose", "ReikoOK");
+    addPopupListeners("PopUpConvict", "ConvictClose", "ConvictOK");
+    addPopupListeners("PopUpIntel", "IntelClose", "IntelOK");
+    addPopupListeners("PopUpDemeter", "DemeterClose", "DemeterOK");
+    addPopupListeners("PopUpVayne", "VayneClose", "VayneOK");
+    addPopupListeners("PopUpRandy", "RandyClose", "RandyOK");
+    addPopupListeners("PopUpCrown", "CrownClose", "CrownOK");
   });
   
   let date = new Date();
@@ -63,9 +64,9 @@ function showPopup(popupId) {
       button.addEventListener('click', function() {
         counter++;
         if (counter % 2 === 1) {
-          desktop.style.backgroundImage = 'url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/dawn.png)';
+          desktop.style.backgroundImage = 'url(./images/retard.png)';
         } else {
-          desktop.style.backgroundImage = 'url(https://raw.githubusercontent.com/swattingzone-oss/doctorshield/refs/heads/main/imgs/black-background-black-waves-d8fbav58488h6bog.gif)';
+          desktop.style.backgroundImage = 'url(./images/girl.jpg)';
         }
       });
     });
