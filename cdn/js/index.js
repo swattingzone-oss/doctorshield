@@ -64,9 +64,9 @@ function showPopup(popupId) {
       button.addEventListener('click', function() {
         counter++;
         if (counter % 2 === 1) {
-          desktop.style.backgroundImage = 'url(./images/retard.png)';
+          desktop.style.backgroundImage = 'url(./imgs/black-background-black-waves-d8fbav58488h6bog.gif)';
         } else {
-          desktop.style.backgroundImage = 'url(./images/girl.jpg)';
+          desktop.style.backgroundImage = 'url(./imgs/dawn.png)';
         }
       });
     });
