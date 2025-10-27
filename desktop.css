@@ -13,14 +13,15 @@
 body {
   font-family: "MS Sans Serif", "VCR OSD Mono", monospace;
   font-size: 14px;
-  letter-spacing: 0.01em;
-  background: #0a0a0a;
-  color: #fff;
+  letter-spacing: 0.02em;
+  background: radial-gradient(circle at center, #040404 0%, #000 100%);
+  color: #f5f5f5;
   overflow-x: hidden;
   width: 100vw;
   height: 100vh;
   image-rendering: pixelated;
   user-select: none;
+  transition: background 1.2s ease;
 }
 
 /* --- LAYOUT ESSENTIALS --- */
@@ -44,20 +45,22 @@ body {
   text-align: center;
   background: url(./imgs/dawn.png) center/cover no-repeat;
   color: #fff;
-  transition: opacity 0.7s ease, filter 0.5s ease;
+  backdrop-filter: blur(6px) brightness(0.9);
+  transition: opacity 0.8s ease, filter 0.6s ease;
 }
 
 #enter:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.2) saturate(1.2);
 }
 
 /* --- DESKTOP --- */
 #desktop {
-  background: url(./imgs/dawn.png) center/cover no-repeat;
+  background: url(./imgs/dawn.png) center/cover no-repeat fixed;
   height: 100vh;
   width: 100vw;
   z-index: -1;
-  transition: background 1s ease-in-out;
+  backdrop-filter: blur(10px) saturate(1.4);
+  transition: background 1s ease-in-out, filter 0.6s ease;
 }
 
 /* --- TOOLBAR / TASKBAR --- */
@@ -66,15 +69,16 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 38px;
-  background: linear-gradient(180deg, #c9c9c9 0%, #a9a9a9 100%);
-  border-top: 2px solid #fff;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(4px);
+  height: 42px;
+  background: rgba(18, 18, 18, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 6px;
+  padding: 0 8px;
+  animation: fadeIn 1s ease;
 }
 
 /* --- START BUTTON --- */
@@ -86,85 +90,87 @@ body {
 #toolbar .toolbar-start-menu .start-button {
   display: flex;
   align-items: center;
-  background: linear-gradient(180deg, #d9d9d9 0%, #9b9b9b 100%);
+  background: linear-gradient(180deg, rgba(40, 40, 40, 0.9), rgba(15, 15, 15, 0.9));
   background-image: url(https://win98icons.alexmeub.com/icons/png/windows-0.png);
   background-repeat: no-repeat;
-  background-position: 4px center;
-  background-size: 20px;
-  padding-left: 32px;
-  padding-right: 12px;
-  height: 30px;
+  background-position: 8px center;
+  background-size: 18px;
+  padding-left: 36px;
+  padding-right: 14px;
+  height: 34px;
   font-weight: bold;
-  border: 2px solid #7c7c7c;
-  border-top-color: #fff;
-  border-left-color: #fff;
-  border-radius: 3px;
+  color: #00f0ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 255, 255, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.06);
 }
 
 #toolbar .toolbar-start-menu .start-button:hover {
-  background-color: #bcbcbc;
+  background: linear-gradient(180deg, rgba(60, 60, 60, 0.95), rgba(20, 20, 20, 0.95));
   transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(255, 255, 255, 0.4) inset;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.1);
 }
 
 /* --- START MENU PANEL --- */
 #toolbar .toolbar-start-menu .start-menu-wrapper {
   position: fixed;
-  left: 2px;
-  bottom: 38px;
-  width: 210px;
-  min-height: 240px;
-  border: 2px solid #7c7c7c;
-  border-top-color: #fff;
-  border-left-color: #fff;
-  background: rgba(192, 192, 192, 0.98);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.3s ease;
+  left: 10px;
+  bottom: 45px;
+  width: 230px;
+  min-height: 250px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 30px rgba(0, 255, 255, 0.15);
+  animation: fadeIn 0.35s ease;
 }
 
 #toolbar .toolbar-start-menu .start-menu-title {
   height: 100%;
   padding: 5px;
-  width: 40px;
+  width: 42px;
   float: left;
-  background: linear-gradient(180deg, #00007b 0%, #0000a5 100%);
+  background: linear-gradient(180deg, #00baff 0%, #007cff 100%);
   color: #fff;
   text-transform: uppercase;
-  font-size: 20px;
-  letter-spacing: 0.05em;
+  font-size: 18px;
+  letter-spacing: 0.06em;
   position: absolute;
+  border-top-left-radius: 10px;
 }
 
 #toolbar .toolbar-start-menu .start-menu-title span {
   transform: rotate(-90deg);
   transform-origin: left 0;
   position: absolute;
-  left: 10px;
+  left: 12px;
   bottom: -10px;
 }
 
 #toolbar .toolbar-start-menu .start-menu {
-  margin-left: 50px;
-  padding: 6px 0;
+  margin-left: 52px;
+  padding: 8px 0;
 }
 
 /* --- TOOLBAR ICONS --- */
 #toolbar .toolbar-icon {
   background: no-repeat center / cover;
-  width: 25px;
-  height: 25px;
-  border: none;
-  margin: 0 4px;
-  transition: transform 0.2s ease, filter 0.3s ease;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 5px;
+  transition: transform 0.25s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
 }
 
 #toolbar .toolbar-icon:hover {
-  transform: scale(1.1);
-  filter: brightness(1.2);
+  transform: scale(1.15);
+  filter: brightness(1.3) saturate(1.4);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 /* ICON ASSIGNMENTS */
@@ -180,50 +186,53 @@ body {
 #toolbar .toolbar-right {
   display: flex;
   align-items: center;
-  gap: 6px;
-  height: 30px;
-  padding: 0 10px;
-  border: 2px solid #7c7c7c;
-  border-bottom-color: #fff;
-  border-right-color: #fff;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #c9c9c9 0%, #a0a0a0 100%);
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 0 12px rgba(0, 255, 255, 0.1);
 }
 
 #toolbar .toolbar-right .time {
   font-weight: bold;
-  text-shadow: 0 1px 0 #fff;
+  font-size: 14px;
+  color: #00eaff;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
 }
 
 /* --- DESKTOP ICONS --- */
 .desktop-icons-container {
   display: flex;
-  padding: 15px;
+  padding: 20px;
 }
 
 .desktop-icons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .desktop-icons .desktop-icon {
   width: 100px;
-  height: 90px;
+  height: 100px;
   text-align: center;
   color: #fff;
-  padding-top: 55px;
+  padding-top: 70px;
   font-size: 13px;
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 48px 48px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  transition: transform 0.25s ease, filter 0.25s ease;
+  background-size: 60px 60px;
+  border-radius: 50%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
 }
 
 .desktop-icons .desktop-icon:hover {
-  transform: translateY(-4px);
-  filter: brightness(1.3);
+  transform: translateY(-6px) scale(1.05);
+  filter: brightness(1.25);
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.25);
 }
 
 /* INDIVIDUAL ICONS */
@@ -234,88 +243,241 @@ body {
 .desktop-icons .desktop-icon.turk { background-image: url(./Members/TuRk.jpg); }
 .desktop-icons .desktop-icon.zurf { background-image: url(./Members/zurf.jpg); }
 .desktop-icons .desktop-icon.earthtoballs { background-image: url(./Members/sha.jpg); }
-
-/* --- MISC ELEMENTS --- */
-.custom-button {
-  border: none !important;
-  outline: none;
+/* --- TASKBAR & TOOLBAR --- */
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 42px;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.6);
 }
 
-h4, .wow {
-  text-transform: uppercase;
-  font-family: "VCR OSD Mono", monospace;
-  letter-spacing: 0.1em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+#taskbar button,
+#taskbar .start-btn {
+  background: linear-gradient(145deg, rgba(30, 30, 35, 0.95), rgba(10, 10, 15, 0.9));
+  color: #e2e2e2;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  margin: 0 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-h4 {
-  font-size: 2px;
+#taskbar button:hover,
+#taskbar .start-btn:hover {
+  background: linear-gradient(145deg, rgba(60, 60, 70, 0.95), rgba(20, 20, 25, 0.9));
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
+  color: #00ffd5;
 }
 
-.wow {
-  font-size: 10px;
+/* --- START MENU --- */
+#start-menu {
+  position: fixed;
+  bottom: 50px;
+  left: 10px;
+  width: 280px;
+  background: rgba(12, 12, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 100;
 }
 
-.draggable, .enter-screen {
+#start-menu.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#start-menu ul {
+  list-style: none;
+  padding: 12px;
+  margin: 0;
+}
+
+#start-menu ul li {
+  padding: 10px;
+  color: #d9d9d9;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+#start-menu ul li:hover {
+  background: rgba(0, 255, 200, 0.08);
+  color: #00ffd5;
+}
+
+/* --- DESKTOP ICONS --- */
+.desktop-icon {
+  width: 88px;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #cfcfcf;
+  text-align: center;
+  margin: 16px;
+  cursor: pointer;
+  border-radius: 18px;
+  transition: all 0.25s ease;
+}
+
+.desktop-icon img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.15);
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 20px rgba(0, 255, 200, 0.12);
+  color: #00ffd5;
+}
+
+.desktop-icon:hover img {
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.5);
+  transform: scale(1.08);
+}
+
+/* --- WINDOW / APP PANEL --- */
+.window {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 560px;
+  height: 380px;
+  background: rgba(15, 15, 25, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.window-header {
+  background: linear-gradient(145deg, rgba(25, 25, 35, 0.98), rgba(12, 12, 20, 0.95));
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: grab;
+  color: #eaeaea;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.window-header .buttons span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.window-header .close { background: #ff4b4b; }
+.window-header .minimize { background: #ffca2c; }
+.window-header .maximize { background: #00ffb3; }
+
+.window-content {
+  padding: 20px;
+  color: #d1d1d1;
+  overflow-y: auto;
+  height: calc(100% - 44px);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* --- PROFILE / MEMBER STYLES --- */
+.member-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  transition: all 0.25s ease;
+}
+
+.member-profile img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
+}
+
+.member-profile:hover {
+  background: rgba(0, 255, 200, 0.06);
+  transform: translateY(-2px);
+}
+
+/* --- POPUPS / MODALS --- */
+.modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
+  transform: translate(-50%, -50%) scale(0.96);
+  background: rgba(15, 15, 25, 0.98);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  width: 440px;
+  max-width: 90%;
+  transition: all 0.3s ease;
+  z-index: 999;
 }
 
-.enter-screen {
-  width: 400px;
-  animation: fadeIn 1s ease;
+.modal.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
 }
 
-/* --- STATUS BAR --- */
-.status-bar {
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.modal-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fafafa;
 }
 
-.status-bar-field {
+.modal-content {
+  padding: 18px 20px;
+  color: #d7d7d7;
+  line-height: 1.5;
+}
+
+/* --- FOOTER / END --- */
+.footer {
   text-align: center;
-  width: 25px;
-  height: 25px;
-  line-height: 22px !important;
-  display: inline-block;
-}
-
-/* --- VOLUME ICON --- */
-.volume {
-  position: fixed;
-  bottom: 38px;
-  right: 10px;
-  opacity: 0.8;
-  z-index: 0;
-}
-
-/* --- MEDIA QUERIES --- */
-@media (max-width: 600px) {
-  #enter, #desktop {
-    background: url("./imgs/dawn.png") center/cover no-repeat;
-  }
-
-  h4 {
-    position: absolute;
-    font-size: 1em !important;
-    padding: 20px;
-    width: 80%;
-    text-align: center;
-    margin-left: 60px;
-  }
-
-  .enter-screen {
-    width: 300px;
-  }
-}
-
-/* --- ANIMATIONS --- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  letter-spacing: 0.5px;
 }
