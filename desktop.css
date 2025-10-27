@@ -5,11 +5,6 @@
   padding: 0;
 }
 
-@font-face {
-  font-family: "Jackeyfont";
-  src: url("cdn/WOFF/jackeyfont.woff");
-}
-
 body {
   font-family: "MS Sans Serif", "VCR OSD Mono", monospace;
   font-size: 14px;
@@ -20,6 +15,7 @@ body {
   height: 100vh;
   image-rendering: pixelated;
   user-select: none;
+  cursor: url('./grave-cursor.cur'), auto;
 }
 
 /* --- DESKTOP --- */
@@ -45,7 +41,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 6px;
-  z-index: 10;
+  z-index: 1000;
 }
 
 /* --- START BUTTON --- */
@@ -56,7 +52,7 @@ body {
   padding-right: 12px;
   height: 30px;
   font-weight: bold;
-  color: #e0e0e0;
+  color: #f0f0f0;
   border: 2px solid #7c7c7c;
   border-top-color: #fff;
   border-left-color: #fff;
@@ -68,7 +64,7 @@ body {
 #toolbar .toolbar-start-menu .start-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(255,255,255,0.3) inset;
-  color: #f5f5f5;
+  color: #fff;
 }
 
 /* --- TOOLBAR ICONS --- */
@@ -83,11 +79,11 @@ body {
 }
 
 #toolbar .toolbar-icon:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(255,255,255,0.5);
+  transform: scale(1.25);
+  box-shadow: 0 0 15px rgba(255,255,255,0.6);
 }
 
-/* --- MEMBER ICONS IN TOOLBAR --- */
+/* --- TOOLBAR MEMBER ICONS --- */
 #toolbar .toolbar-icon.outlook { background-image: url(./Members/demises.jpg); }
 #toolbar .toolbar-icon.correction { background-image: url(./Members/akanes.jpg); }
 #toolbar .toolbar-icon.wanted { background-image: url(./Members/dadas.jpg); }
@@ -110,23 +106,25 @@ body {
   border-radius: 50%;
   background-position: center;
   background-size: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 6px 18px rgba(255,255,255,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
   cursor: pointer;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   color: #fff;
-  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+  text-shadow: 0 0 6px rgba(0,0,0,0.8);
   font-size: 13px;
   font-weight: bold;
   padding-bottom: 6px;
+  opacity: 1;
 }
 
+/* --- ICON HOVER EFFECTS --- */
 .desktop-icons .desktop-icon:hover {
-  transform: scale(1.25) translateY(-4px);
-  box-shadow: 0 0 25px rgba(255,255,255,0.7), 0 10px 20px rgba(0,0,0,0.5);
-  filter: brightness(1.25);
+  transform: scale(1.3) translateY(-6px);
+  box-shadow: 0 0 30px rgba(255,255,255,0.8), 0 12px 28px rgba(0,0,0,0.6);
+  filter: brightness(1.3);
 }
 
 /* --- DESKTOP MEMBER ICONS --- */
@@ -138,20 +136,20 @@ body {
 .desktop-icons .desktop-icon.zurf { background-image: url(./Members/zurf.jpg); }
 .desktop-icons .desktop-icon.earthtoballs { background-image: url(./Members/sha.jpg); }
 
-/* --- MEMBER POPUPS --- */
+/* --- MEMBER POPUPS CENTERED --- */
 .window.draggable {
-  width: 300px !important;
-  border-radius: 18px;
-  background: rgba(20,20,20,0.95);
+  width: 320px !important;
+  border-radius: 20px;
+  background: rgba(25,25,25,0.95);
   border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 0 30px rgba(255,255,255,0.3), 0 10px 25px rgba(0,0,0,0.6);
+  box-shadow: 0 0 35px rgba(255,255,255,0.3), 0 12px 30px rgba(0,0,0,0.6);
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) scale(0.95);
   opacity: 0;
   transition: transform 0.35s ease, opacity 0.35s ease;
-  z-index: 20;
+  z-index: 2000;
 }
 
 .window.draggable.active {
@@ -161,23 +159,23 @@ body {
 
 .window.draggable img {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   object-fit: cover;
-  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  box-shadow: 0 0 25px rgba(255,255,255,0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: block;
   margin: 20px auto 10px auto;
 }
 
 .window.draggable img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 30px rgba(255,255,255,0.7);
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(255,255,255,0.8);
 }
 
 .window.draggable p {
   text-align: center;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.9);
   font-size: 15px;
   font-weight: bold;
   margin-top: 6px;
@@ -208,7 +206,7 @@ body {
   border-radius: 10px;
   padding: 12px;
   backdrop-filter: blur(6px);
-  box-shadow: 0 0 20px rgba(255,255,255,0.12);
+  box-shadow: 0 0 25px rgba(255,255,255,0.15);
   transition: all 0.3s ease;
 }
 
@@ -227,11 +225,28 @@ body {
   height: 18px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .volume input[type=range]::-webkit-slider-thumb:hover {
   transform: scale(1.3);
-  box-shadow: 0 0 14px rgba(255,255,255,0.6);
+  box-shadow: 0 0 18px rgba(255,255,255,0.7);
+}
+
+/* --- CURSOR SPARKLES EFFECT --- */
+@keyframes sparkle {
+  0% {transform: translateY(0) scale(0.5); opacity: 1;}
+  100% {transform: translateY(-20px) scale(0); opacity: 0;}
+}
+
+.cursor-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%);
+  animation: sparkle 0.7s linear forwards;
+  z-index: 3000;
 }
