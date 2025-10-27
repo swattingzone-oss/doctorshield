@@ -45,13 +45,11 @@ body {
   background: url(./imgs/dawn.png) center/cover no-repeat;
   color: #fff;
   transition: opacity 0.7s ease, filter 0.5s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 #enter:hover {
   filter: brightness(1.15);
+  transition: filter 0.3s ease;
 }
 
 /* --- DESKTOP --- */
@@ -60,7 +58,7 @@ body {
   height: 100vh;
   width: 100vw;
   z-index: -1;
-  transition: background 1s ease-in-out, filter 0.5s ease-in-out;
+  transition: background 1s ease-in-out;
 }
 
 /* --- TOOLBAR / TASKBAR --- */
@@ -70,9 +68,9 @@ body {
   left: 0;
   width: 100%;
   height: 40px;
-  background: linear-gradient(180deg, #cfcfcf 0%, #a9a9a9 100%);
-  border-top: 2px solid #fff;
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(180deg, #2c2c2c 0%, #1c1c1c 100%);
+  border-top: 2px solid #444;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -81,20 +79,24 @@ body {
 }
 
 /* --- START BUTTON --- */
+#toolbar .toolbar-start-menu {
+  display: flex;
+  align-items: center;
+}
+
 #toolbar .toolbar-start-menu .start-button {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  background: linear-gradient(180deg, #e0e0e0 0%, #9b9b9b 100%);
+  background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
   background-image: url(https://win98icons.alexmeub.com/icons/png/windows-0.png);
   background-repeat: no-repeat;
   background-position: 6px center;
   background-size: 20px;
-  padding-left: 36px;
+  padding-left: 32px;
   padding-right: 14px;
   height: 32px;
   font-weight: bold;
-  border: 2px solid #7c7c7c;
+  border: 2px solid #666;
   border-top-color: #fff;
   border-left-color: #fff;
   border-radius: 4px;
@@ -103,9 +105,9 @@ body {
 }
 
 #toolbar .toolbar-start-menu .start-button:hover {
-  background-color: #d0d0d0;
+  background-color: #5c5c5c;
   transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) inset;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.45) inset;
 }
 
 /* --- START MENU PANEL --- */
@@ -114,45 +116,99 @@ body {
   left: 2px;
   bottom: 40px;
   width: 220px;
-  min-height: 260px;
-  border: 2px solid #7c7c7c;
+  min-height: 240px;
+  border: 2px solid #666;
   border-top-color: #fff;
   border-left-color: #fff;
-  background: rgba(200, 200, 200, 0.95);
+  background: rgba(60, 60, 60, 0.95);
   backdrop-filter: blur(8px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
   animation: fadeIn 0.3s ease;
-  border-radius: 6px;
+}
+
+#toolbar .toolbar-start-menu .start-menu-title {
+  height: 100%;
+  padding: 6px;
+  width: 42px;
+  float: left;
+  background: linear-gradient(180deg, #001a7b 0%, #0000b5 100%);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  position: absolute;
+}
+
+#toolbar .toolbar-start-menu .start-menu-title span {
+  transform: rotate(-90deg);
+  transform-origin: left 0;
+  position: absolute;
+  left: 12px;
+  bottom: -12px;
+}
+
+#toolbar .toolbar-start-menu .start-menu {
+  margin-left: 52px;
+  padding: 8px 0;
 }
 
 /* --- TOOLBAR ICONS --- */
 #toolbar .toolbar-icon {
   background: no-repeat center / cover;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border: none;
   margin: 0 5px;
   transition: transform 0.2s ease, filter 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+  border-radius: 4px;
 }
 
 #toolbar .toolbar-icon:hover {
-  transform: scale(1.15);
-  filter: brightness(1.3) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  transform: scale(1.1);
+  filter: brightness(1.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+/* ICON ASSIGNMENTS */
+#toolbar .toolbar-icon.outlook { background-image: url(./Members/demises.jpg); }
+#toolbar .toolbar-icon.correction { background-image: url(./Members/akanes.jpg); }
+#toolbar .toolbar-icon.wanted { background-image: url(./Members/dadas.jpg); }
+#toolbar .toolbar-icon.owned { background-image: url(./Members/gothic.jpg); }
+#toolbar .toolbar-icon.err { background-image: url(./Members/TuRk.jpg); }
+#toolbar .toolbar-icon.icndrp { background-image: url(./Members/zurf.jpg); }
+#toolbar .toolbar-icon.icdri { background-image: url(./Members/sha.jpg); }
+
+/* --- TOOLBAR RIGHT SECTION --- */
+#toolbar .toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  border: 2px solid #666;
+  border-bottom-color: #fff;
+  border-right-color: #fff;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #3c3c3c 0%, #2a2a2a 100%);
+}
+
+#toolbar .toolbar-right .time {
+  font-weight: bold;
+  text-shadow: 0 1px 0 #fff;
 }
 
 /* --- DESKTOP ICONS --- */
 .desktop-icons-container {
   display: flex;
   padding: 20px;
-  gap: 25px;
+  gap: 40px;
 }
 
 .desktop-icons {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .desktop-icons .desktop-icon {
@@ -161,19 +217,41 @@ body {
   text-align: center;
   color: #fff;
   padding-top: 60px;
-  font-size: 13px;
+  font-size: 14px;
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 60px 60px;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+  background-size: 56px 56px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
   transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.3s ease;
-  border-radius: 50%;
 }
 
 .desktop-icons .desktop-icon:hover {
-  transform: translateY(-6px) scale(1.05);
-  filter: brightness(1.35);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  transform: translateY(-6px);
+  filter: brightness(1.4);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.4);
+}
+
+/* INDIVIDUAL ICONS */
+.desktop-icons .desktop-icon.akane { background-image: url(./Members/akanes.jpg); }
+.desktop-icons .desktop-icon.demise { background-image: url(./Members/demises.jpg); }
+.desktop-icons .desktop-icon.dismayings { background-image: url(./Members/dadas.jpg); }
+.desktop-icons .desktop-icon.gothic { background-image: url(./Members/gothic.jpg); }
+.desktop-icons .desktop-icon.turk { background-image: url(./Members/TuRk.jpg); }
+.desktop-icons .desktop-icon.zurf { background-image: url(./Members/zurf.jpg); }
+.desktop-icons .desktop-icon.earthtoballs { background-image: url(./Members/sha.jpg); }
+
+/* --- PROFILE / MEMBER POPUPS --- */
+.rounded-img {
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.rounded-img:hover {
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.45);
+  transform: scale(1.05);
 }
 
 /* --- MISC ELEMENTS --- */
@@ -186,18 +264,12 @@ h4, .wow {
   text-transform: uppercase;
   font-family: "VCR OSD Mono", monospace;
   letter-spacing: 0.1em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-h4 {
-  font-size: 2px;
-}
+h4 { font-size: 14px; }
+.wow { font-size: 10px; }
 
-.wow {
-  font-size: 10px;
-}
-
-/* --- DRAGGABLE WINDOWS --- */
 .draggable, .enter-screen {
   position: fixed;
   top: 50%;
@@ -208,10 +280,7 @@ h4 {
 
 .enter-screen {
   width: 420px;
-  animation: fadeIn 0.9s ease;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.5);
+  animation: fadeIn 1s ease;
 }
 
 /* --- STATUS BAR --- */
@@ -228,13 +297,6 @@ h4 {
   height: 28px;
   line-height: 26px !important;
   display: inline-block;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.status-bar-field:hover {
-  background: rgba(255,255,255,0.08);
-  border-radius: 4px;
 }
 
 /* --- VOLUME ICON --- */
@@ -244,8 +306,6 @@ h4 {
   right: 12px;
   opacity: 0.9;
   z-index: 10;
-  border-radius: 6px;
-  backdrop-filter: blur(4px);
 }
 
 /* --- MEDIA QUERIES --- */
@@ -255,9 +315,8 @@ h4 {
   }
 
   h4 {
-    position: absolute;
-    font-size: 0.9em !important;
-    padding: 18px;
+    font-size: 1em !important;
+    padding: 20px;
     width: 80%;
     text-align: center;
     margin-left: 60px;
@@ -267,15 +326,16 @@ h4 {
     width: 320px;
   }
 
-  .desktop-icons-container {
-    flex-direction: column;
-    gap: 15px;
-    padding: 12px;
+  .desktop-icons .desktop-icon {
+    width: 80px;
+    height: 80px;
+    padding-top: 48px;
+    background-size: 40px 40px;
   }
 }
 
 /* --- ANIMATIONS --- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
