@@ -13,7 +13,6 @@
 body {
   font-family: "MS Sans Serif", "VCR OSD Mono", monospace;
   font-size: 14px;
-  letter-spacing: 0.01em;
   background: #0a0a0a;
   color: #fff;
   overflow-x: hidden;
@@ -23,40 +22,16 @@ body {
   user-select: none;
 }
 
-/* --- LAYOUT ESSENTIALS --- */
-#main { z-index: 3; }
-
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* --- ENTER SCREEN --- */
-#enter {
-  position: fixed;
-  inset: 0;
-  z-index: 3;
-  cursor: pointer;
-  text-align: center;
-  background: url(./imgs/dawn.png) center/cover no-repeat;
-  color: #fff;
-  transition: opacity 0.7s ease, filter 0.5s ease;
-}
-
-#enter:hover { filter: brightness(1.1); }
-
 /* --- DESKTOP --- */
 #desktop {
   background: url(./imgs/dawn.png) center/cover no-repeat;
   height: 100vh;
   width: 100vw;
-  z-index: -1;
-  transition: background 1s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
-/* --- TOOLBAR / TASKBAR --- */
+/* --- TOOLBAR --- */
 #toolbar {
   position: fixed;
   bottom: 0;
@@ -65,23 +40,18 @@ body {
   height: 38px;
   background: linear-gradient(180deg, #c9c9c9 0%, #a9a9a9 100%);
   border-top: 2px solid #fff;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(4px);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 6px;
+  z-index: 10;
 }
 
 /* --- START BUTTON --- */
 #toolbar .toolbar-start-menu .start-button {
   display: flex;
   align-items: center;
-  background: linear-gradient(180deg, #d9d9d9 0%, #9b9b9b 100%);
-  background-image: url(https://win98icons.alexmeub.com/icons/png/windows-0.png);
-  background-repeat: no-repeat;
-  background-position: 4px center;
-  background-size: 20px;
   padding-left: 32px;
   padding-right: 12px;
   height: 30px;
@@ -92,240 +62,136 @@ body {
   border-left-color: #fff;
   border-radius: 3px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, color 0.2s ease;
 }
 
 #toolbar .toolbar-start-menu .start-button:hover {
-  background-color: #bcbcbc;
   transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(255, 255, 255, 0.4) inset;
-}
-
-/* --- START MENU PANEL --- */
-#toolbar .toolbar-start-menu .start-menu-wrapper {
-  position: fixed;
-  left: 2px;
-  bottom: 38px;
-  width: 210px;
-  min-height: 240px;
-  border: 2px solid #7c7c7c;
-  border-top-color: #fff;
-  border-left-color: #fff;
-  background: rgba(192, 192, 192, 0.98);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.3s ease;
-}
-
-#toolbar .toolbar-start-menu .start-menu-title {
-  height: 100%;
-  padding: 5px;
-  width: 40px;
-  float: left;
-  background: linear-gradient(180deg, #00007b 0%, #0000a5 100%);
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 20px;
-  letter-spacing: 0.05em;
-  position: absolute;
-}
-
-#toolbar .toolbar-start-menu .start-menu-title span {
-  transform: rotate(-90deg);
-  transform-origin: left 0;
-  position: absolute;
-  left: 10px;
-  bottom: -10px;
-}
-
-#toolbar .toolbar-start-menu .start-menu {
-  margin-left: 50px;
-  padding: 6px 0;
+  box-shadow: 0 2px 4px rgba(255,255,255,0.3) inset;
+  color: #f5f5f5;
 }
 
 /* --- TOOLBAR ICONS --- */
 #toolbar .toolbar-icon {
-  background: no-repeat center / cover;
-  width: 25px;
-  height: 25px;
-  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
   margin: 0 4px;
-  transition: transform 0.2s ease, filter 0.3s ease;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 #toolbar .toolbar-icon:hover {
-  transform: scale(1.1);
-  filter: brightness(1.2);
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255,255,255,0.5);
 }
 
-/* --- TOOLBAR RIGHT SECTION --- */
-#toolbar .toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 30px;
-  padding: 0 10px;
-  border: 2px solid #7c7c7c;
-  border-bottom-color: #fff;
-  border-right-color: #fff;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #c9c9c9 0%, #a0a0a0 100%);
-}
-
-#toolbar .toolbar-right .time {
-  font-weight: bold;
-  text-shadow: 0 1px 0 #fff;
-}
+/* --- MEMBER ICONS IN TOOLBAR --- */
+#toolbar .toolbar-icon.outlook { background-image: url(./Members/demises.jpg); }
+#toolbar .toolbar-icon.correction { background-image: url(./Members/akanes.jpg); }
+#toolbar .toolbar-icon.wanted { background-image: url(./Members/dadas.jpg); }
+#toolbar .toolbar-icon.owned { background-image: url(./Members/gothic.jpg); }
+#toolbar .toolbar-icon.err { background-image: url(./Members/TuRk.jpg); }
+#toolbar .toolbar-icon.icndrp { background-image: url(./Members/zurf.jpg); }
+#toolbar .toolbar-icon.icdri { background-image: url(./Members/sha.jpg); }
 
 /* --- DESKTOP ICONS --- */
 .desktop-icons-container {
   display: flex;
+  flex-wrap: wrap;
   padding: 15px;
-}
-
-.desktop-icons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 
 .desktop-icons .desktop-icon {
   width: 100px;
-  height: 90px;
-  text-align: center;
-  color: #fff;
-  padding-top: 55px;
-  font-size: 13px;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: 48px 48px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  height: 100px;
   border-radius: 50%;
-  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+  font-size: 13px;
+  font-weight: bold;
+  padding-bottom: 6px;
 }
 
 .desktop-icons .desktop-icon:hover {
-  transform: scale(1.2);
-  filter: brightness(1.3);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  transform: scale(1.25) translateY(-4px);
+  box-shadow: 0 0 25px rgba(255,255,255,0.7), 0 10px 20px rgba(0,0,0,0.5);
+  filter: brightness(1.25);
 }
 
-/* --- MISC ELEMENTS --- */
-.custom-button { border: none !important; outline: none; }
+/* --- DESKTOP MEMBER ICONS --- */
+.desktop-icons .desktop-icon.akane { background-image: url(./Members/akanes.jpg); }
+.desktop-icons .desktop-icon.demise { background-image: url(./Members/demises.jpg); }
+.desktop-icons .desktop-icon.dismayings { background-image: url(./Members/dadas.jpg); }
+.desktop-icons .desktop-icon.gothic { background-image: url(./Members/gothic.jpg); }
+.desktop-icons .desktop-icon.turk { background-image: url(./Members/TuRk.jpg); }
+.desktop-icons .desktop-icon.zurf { background-image: url(./Members/zurf.jpg); }
+.desktop-icons .desktop-icon.earthtoballs { background-image: url(./Members/sha.jpg); }
 
-h4, .wow {
-  text-transform: uppercase;
-  font-family: "VCR OSD Mono", monospace;
-  letter-spacing: 0.1em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-}
-
-h4 { font-size: 2px; }
-.wow { font-size: 10px; }
-
-.draggable, .enter-screen {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-}
-
-.enter-screen { width: 400px; animation: fadeIn 1s ease; }
-
-/* --- STATUS BAR --- */
-.status-bar {
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.status-bar-field {
-  text-align: center;
-  width: 25px;
-  height: 25px;
-  line-height: 22px !important;
-  display: inline-block;
-}
-
-/* --- VOLUME ICON --- */
-.volume {
-  position: fixed;
-  bottom: 38px;
-  right: 10px;
-  opacity: 0.9;
-  z-index: 10;
-  background: rgba(25, 25, 25, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 12px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.12);
-}
-
-.volume .title-bar-text { font-weight: bold; }
-
-#volume input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: 4px;
-  background: rgba(255,255,255,0.05);
-  cursor: pointer;
-}
-
-#volume input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 6px rgba(0,0,0,0.5);
-  transition: transform 0.2s;
-}
-
-#volume input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-
-/* --- POPUP WINDOWS (MEMBERS) --- */
+/* --- MEMBER POPUPS --- */
 .window.draggable {
-  width: 280px !important;
-  border-radius: 12px;
+  width: 300px !important;
+  border-radius: 18px;
   background: rgba(20,20,20,0.95);
   border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 0 30px rgba(255,255,255,0.3), 0 10px 25px rgba(0,0,0,0.6);
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  z-index: 20;
+}
+
+.window.draggable.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
 
 .window.draggable img {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
-  box-shadow: 0 0 12px rgba(255,255,255,0.3);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin: 20px auto 10px auto;
 }
 
 .window.draggable img:hover {
-  box-shadow: 0 0 25px rgba(255,255,255,0.5);
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(255,255,255,0.7);
 }
 
 .window.draggable p {
   text-align: center;
   color: rgba(255,255,255,0.85);
-  margin-top: 8px;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 6px;
 }
 
+/* --- START BUTTON & POPUP TEXT --- */
 .window.draggable .field-row button {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  color: rgba(255,255,255,0.92);
+  transition: all 0.2s ease;
 }
 
 .window.draggable .field-row button:hover {
@@ -333,15 +199,39 @@ h4 { font-size: 2px; }
   transform: translateY(-2px);
 }
 
-/* --- MEDIA QUERIES --- */
-@media (max-width: 600px) {
-  #enter, #desktop { background: url("./imgs/dawn.png") center/cover no-repeat; }
-  h4 { position: absolute; font-size: 1em !important; padding: 20px; width: 80%; text-align: center; margin-left: 60px; }
-  .enter-screen { width: 300px; }
+/* --- VOLUME POPUP --- */
+.volume {
+  position: fixed;
+  bottom: 50px;
+  right: 12px;
+  background: rgba(30,30,30,0.96);
+  border-radius: 10px;
+  padding: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255,255,255,0.12);
+  transition: all 0.3s ease;
 }
 
-/* --- ANIMATIONS --- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.volume input[type=range] {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.volume input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.volume input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 14px rgba(255,255,255,0.6);
 }
