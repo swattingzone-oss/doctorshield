@@ -43,7 +43,7 @@
     cursor: pointer;
     position: fixed;
     text-align: center;
-    background-image: url(imgs/girl.jpg);
+    background-image: url(./imgs/dawn.png);
     background-size: cover;
     background-repeat: no-repeat;
   
@@ -55,7 +55,7 @@
   }
   
   #desktop {
-    background-image: url(imgs/girl.jpg);
+    background-image: url(./imgs/dawn.png);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -156,7 +156,7 @@
   }
   
   #toolbar .toolbar-icon.outlook {
-    background-image: url(Members/zurf.jpg);
+    background-image: url(./Members/demises.jpg);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     z-index: 100 !important;
@@ -164,35 +164,42 @@
   }
   
   #toolbar .toolbar-icon.correction {
-    background-image: url(Members/term.jpg);
+    background-image: url(./Members/akanes.jpg);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     z-index: 100 !important;
   }
   
   #toolbar .toolbar-icon.wanted {
-    background-image: url(Members/dynasty.jpg);
+    background-image: url(./Members/dadas.jpg);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     z-index: 100 !important;
   }
   
   #toolbar .toolbar-icon.owned {
-    background-image: url(Members/paragon.jpg);
+    background-image: url(./Members/gothic.jpg);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     z-index: 100 !important;
   }
   
   #toolbar .toolbar-icon.err {
-    background-image: url(Members/decepted.jpg);
+    background-image: url(./Members/TuRk.jpg);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     z-index: 100 !important;
   }
 
   #toolbar .toolbar-icon.icndrp {
-    background-image: url(Members/tape.jpg);
+    background-image: url(./Members/zurf.jpg);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    z-index: 100 !important;
+  }
+
+  #toolbar .toolbar-icon.icdri {
+    background-image: url(./Members/sha.jpg);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     z-index: 100 !important;
@@ -232,44 +239,44 @@
   }
   
   
-  .desktop-icons .desktop-icon.revokeember {
-    background-image: url(Members/revoke.jpg);
+  .desktop-icons .desktop-icon.akane {
+    background-image: url(./Members/akanes.jpg);
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+  }
+  
+  .desktop-icons .desktop-icon.demise {
+    background-image: url(./Members/demises.jpg);
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+  }
+  
+  .desktop-icons .desktop-icon.dismayings {
+    background-image: url(./Members/dadas.jpg);
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+  }
+  
+  .desktop-icons .desktop-icon.gothic {
+    background-image: url(./Members/gothic.jpg);
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+  }
+  
+  .desktop-icons .desktop-icon.turk {
+    background-image: url(./Members/TuRk.jpg);
     background-repeat: no-repeat;
     background-size: 48px 48px;
   }
   
   .desktop-icons .desktop-icon.zurf {
-    background-image: url(Members/zurf.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.term {
-    background-image: url(Members/term.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.dynasty {
-    background-image: url(Members/dynasty.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.paragon {
-    background-image: url(Members/paragon.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.decepted {
-    background-image: url(Members/decepted.jpg);
+    background-image: url(./Members/zurf.jpg);
     background-repeat: no-repeat;
     background-size: 48px 48px;
   }
 
   .desktop-icons .desktop-icon.earthtoballs {
-    background-image: url(Members/tape.jpg);
+    background-image: url(./Members/sha.jpg);
     background-repeat: no-repeat;
     background-size: 48px 48px;
   }
@@ -309,12 +316,12 @@
   
   @media only screen and (max-width: 600px) {
     #enter {
-        background-image: url("imgs/mobile-girl.png");
+        background-image: url("./imgs/dawn.png");
         z-index: 1;
     }
   
     #desktop {
-        background-image: url("imgs/mobile-girl.png");
+        background-image: url("./imgs/dawn.png");
         z-index: 1;
     }
   
