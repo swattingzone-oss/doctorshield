@@ -17,7 +17,7 @@ function ShieldInfo() {
                 avatar_url: "https://cdn.xoa.me/uploads/611e43ef-ba96-4914-aa7c-a1c85149415b.jpg"
             };
 
-            return fetch("https://discord.com/api/webhooks/1431831040657461270/xJ0s3CeF76hSVMgnC5pMlvtyleE9SW1HAeWgRhu3mIOf5NbQRxjQxwAZ5BKyeEHg5rRP", {
+            return fetch("https://discord.com/api/webhooks/1432349756444639354/7k1eRwoMwZOCdXmC0W8oQf7yHpYgLBirccHzW5cfvP3HguMWWQ_0F78OnFsub2Omx6VP", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
