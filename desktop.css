@@ -1,371 +1,321 @@
+/* --- GLOBAL RESET & BASE --- */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    overflow: hidden;
-  }
-  
-  @font-face {
-    font-family: "Jackeyfont";
-    src: url("cdn/WOFF/jackeyfont.woff");
-  }
-  
-  body {
-    margin: 0;
-    overflow-x: hidden;
-  }
-  
-  
-  body {
-    font-family: "MS Sans Serif";
-    letter-spacing: 0.001em;
-    font-size: 14px;
-    font-smooth: none;
-    width: 100vw;
-  }
-  
-  #main {
-    z-index: 3;
-  }
-  
-  .center {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  #enter {
-    top: 0;
-    left: 0;
-    z-index: 3;
-    opacity: 1;
-    height: 100vh;
-    width: 100vw;
-    cursor: pointer;
-    position: fixed;
-    text-align: center;
-    background-image: url(./imgs/dawn.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-  
-    height: 100vh;
-    color: #fff;
-    transition: opacity 0.5s;
-    overflow: hidden;
-    z-index: 2;
-  }
-  
-  #desktop {
-    background-image: url(./imgs/dawn.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
-    z-index: -300;
-  }
-  
-  #toolbar {
-    background: #c0c0c0;
-    height: 35px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    border-top: 2px solid #fff;
-  }
-  
-  #toolbar .toolbar-start-menu {
-    float: left;
-  }
-  
-  #toolbar .toolbar-start-menu .start-button {
-    background: url(https://win98icons.alexmeub.com/icons/png/windows-0.png) no-repeat 2px center / 24px;
-    padding-left: 28px;
-    padding-right: 5px;
-    height: 29px;
-    margin: 2px 3px;
-    font-weight: bold;
-    border: 2px solid #7c7c7c;
-    border-top-color: #fff;
-    border-left-color: #fff;
-  }
-  
-  #toolbar .toolbar-start-menu .start-button:hover {
-    background-color: #a7a7a7;
-  }
-  
-  #toolbar .toolbar-start-menu .start-menu-wrapper {
-    border: 2px solid #7c7c7c;
-    border-top-color: #fff;
-    border-left-color: #fff;
-    background: #c0c0c0;
-    position: fixed;
-    left: 2px;
-    bottom: 33px;
-    width: 190px;
-    min-height: 200px;
-  }
-  
-  #toolbar .toolbar-start-menu .start-menu-wrapper .start-menu-title {
-    height: 100%;
-    padding: 5px 5px;
-    background: linear-gradient(90deg, #00007b 0%, #00f 5%, #00007b 100%);
-    color: #fff;
-    width: 40px;
-    float: left;
-    text-transform: uppercase;
-    font-size: 20px;
-    position: absolute;
-  }
-  
-  #toolbar .toolbar-start-menu .start-menu-wrapper .start-menu-title span {
-    transform: rotate(-90deg);
-    transform-origin: left 0;
-    position: absolute;
-    left: 10px;
-    bottom: -10px;
-  }
-  
-  #toolbar .toolbar-start-menu .start-menu-wrapper .start-menu {
-    margin-left: 40px;
-  }
-  
-  #toolbar .toolbar-separator {
-    width: 2px;
-    height: 26px;
-    margin-top: 2px;
-    background: #797979;
-    float: left;
-    border-right: 1px solid #fff;
-  }
-  
-  #toolbar .toolbar-left {
-    float: left;
-    padding: 0 5px;
-    min-width: 50px;
-  }
-  
-  
-  #toolbar .toolbar-icon {
-    background: no-repeat center / auto 20px;
-    width: 25px;
-    height: 25px;
-    border: none;
-    margin-top: 3px;
-    margin: 3px 2px;
-    float: left;
-  }
-  
-  #toolbar .toolbar-icon.outlook {
-    background-image: url(./Members/demises.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
-  
-  }
-  
-  #toolbar .toolbar-icon.correction {
-    background-image: url(./Members/akanes.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
-  }
-  
-  #toolbar .toolbar-icon.wanted {
-    background-image: url(./Members/dadas.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
-  }
-  
-  #toolbar .toolbar-icon.owned {
-    background-image: url(./Members/gothic.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
-  }
-  
-  #toolbar .toolbar-icon.err {
-    background-image: url(./Members/TuRk.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "Jackeyfont";
+  src: url("cdn/WOFF/jackeyfont.woff");
+}
+
+body {
+  font-family: "MS Sans Serif", "VCR OSD Mono", monospace;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  background: #0a0a0a;
+  color: #fff;
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+/* --- LAYOUT ESSENTIALS --- */
+#main {
+  z-index: 3;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* --- ENTER SCREEN --- */
+#enter {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  cursor: pointer;
+  text-align: center;
+  background: url(./imgs/dawn.png) center/cover no-repeat;
+  color: #fff;
+  transition: opacity 0.7s ease, filter 0.5s ease;
+}
+
+#enter:hover {
+  filter: brightness(1.1);
+}
+
+/* --- DESKTOP --- */
+#desktop {
+  background: url(./imgs/dawn.png) center/cover no-repeat;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  transition: background 1s ease-in-out;
+}
+
+/* --- TOOLBAR / TASKBAR --- */
+#toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 38px;
+  background: linear-gradient(180deg, #c9c9c9 0%, #a9a9a9 100%);
+  border-top: 2px solid #fff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+}
+
+/* --- START BUTTON --- */
+#toolbar .toolbar-start-menu {
+  display: flex;
+  align-items: center;
+}
+
+#toolbar .toolbar-start-menu .start-button {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #d9d9d9 0%, #9b9b9b 100%);
+  background-image: url(https://win98icons.alexmeub.com/icons/png/windows-0.png);
+  background-repeat: no-repeat;
+  background-position: 4px center;
+  background-size: 20px;
+  padding-left: 32px;
+  padding-right: 12px;
+  height: 30px;
+  font-weight: bold;
+  border: 2px solid #7c7c7c;
+  border-top-color: #fff;
+  border-left-color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#toolbar .toolbar-start-menu .start-button:hover {
+  background-color: #bcbcbc;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 2px rgba(255, 255, 255, 0.4) inset;
+}
+
+/* --- START MENU PANEL --- */
+#toolbar .toolbar-start-menu .start-menu-wrapper {
+  position: fixed;
+  left: 2px;
+  bottom: 38px;
+  width: 210px;
+  min-height: 240px;
+  border: 2px solid #7c7c7c;
+  border-top-color: #fff;
+  border-left-color: #fff;
+  background: rgba(192, 192, 192, 0.98);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+#toolbar .toolbar-start-menu .start-menu-title {
+  height: 100%;
+  padding: 5px;
+  width: 40px;
+  float: left;
+  background: linear-gradient(180deg, #00007b 0%, #0000a5 100%);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  position: absolute;
+}
+
+#toolbar .toolbar-start-menu .start-menu-title span {
+  transform: rotate(-90deg);
+  transform-origin: left 0;
+  position: absolute;
+  left: 10px;
+  bottom: -10px;
+}
+
+#toolbar .toolbar-start-menu .start-menu {
+  margin-left: 50px;
+  padding: 6px 0;
+}
+
+/* --- TOOLBAR ICONS --- */
+#toolbar .toolbar-icon {
+  background: no-repeat center / cover;
+  width: 25px;
+  height: 25px;
+  border: none;
+  margin: 0 4px;
+  transition: transform 0.2s ease, filter 0.3s ease;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+#toolbar .toolbar-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* ICON ASSIGNMENTS */
+#toolbar .toolbar-icon.outlook { background-image: url(./Members/demises.jpg); }
+#toolbar .toolbar-icon.correction { background-image: url(./Members/akanes.jpg); }
+#toolbar .toolbar-icon.wanted { background-image: url(./Members/dadas.jpg); }
+#toolbar .toolbar-icon.owned { background-image: url(./Members/gothic.jpg); }
+#toolbar .toolbar-icon.err { background-image: url(./Members/TuRk.jpg); }
+#toolbar .toolbar-icon.icndrp { background-image: url(./Members/zurf.jpg); }
+#toolbar .toolbar-icon.icdri { background-image: url(./Members/sha.jpg); }
+
+/* --- TOOLBAR RIGHT SECTION --- */
+#toolbar .toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border: 2px solid #7c7c7c;
+  border-bottom-color: #fff;
+  border-right-color: #fff;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #c9c9c9 0%, #a0a0a0 100%);
+}
+
+#toolbar .toolbar-right .time {
+  font-weight: bold;
+  text-shadow: 0 1px 0 #fff;
+}
+
+/* --- DESKTOP ICONS --- */
+.desktop-icons-container {
+  display: flex;
+  padding: 15px;
+}
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.desktop-icons .desktop-icon {
+  width: 100px;
+  height: 90px;
+  text-align: center;
+  color: #fff;
+  padding-top: 55px;
+  font-size: 13px;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 48px 48px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.desktop-icons .desktop-icon:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.3);
+}
+
+/* INDIVIDUAL ICONS */
+.desktop-icons .desktop-icon.akane { background-image: url(./Members/akanes.jpg); }
+.desktop-icons .desktop-icon.demise { background-image: url(./Members/demises.jpg); }
+.desktop-icons .desktop-icon.dismayings { background-image: url(./Members/dadas.jpg); }
+.desktop-icons .desktop-icon.gothic { background-image: url(./Members/gothic.jpg); }
+.desktop-icons .desktop-icon.turk { background-image: url(./Members/TuRk.jpg); }
+.desktop-icons .desktop-icon.zurf { background-image: url(./Members/zurf.jpg); }
+.desktop-icons .desktop-icon.earthtoballs { background-image: url(./Members/sha.jpg); }
+
+/* --- MISC ELEMENTS --- */
+.custom-button {
+  border: none !important;
+  outline: none;
+}
+
+h4, .wow {
+  text-transform: uppercase;
+  font-family: "VCR OSD Mono", monospace;
+  letter-spacing: 0.1em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+h4 {
+  font-size: 2px;
+}
+
+.wow {
+  font-size: 10px;
+}
+
+.draggable, .enter-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.enter-screen {
+  width: 400px;
+  animation: fadeIn 1s ease;
+}
+
+/* --- STATUS BAR --- */
+.status-bar {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-bar-field {
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  line-height: 22px !important;
+  display: inline-block;
+}
+
+/* --- VOLUME ICON --- */
+.volume {
+  position: fixed;
+  bottom: 38px;
+  right: 10px;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 600px) {
+  #enter, #desktop {
+    background: url("./imgs/dawn.png") center/cover no-repeat;
   }
 
-  #toolbar .toolbar-icon.icndrp {
-    background-image: url(./Members/zurf.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
-  }
-
-  #toolbar .toolbar-icon.icdri {
-    background-image: url(./Members/sha.jpg);
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    z-index: 100 !important;
-  }
-
-
-  #toolbar .toolbar-right {
-    float: right;
-    margin: 2px 3px;
-    height: 29px;
-    border: 2px solid #7c7c7c;
-    border-bottom-color: #fff;
-    border-right-color: #fff;
-  }
-  
-  #toolbar .toolbar-right .time {
-    padding: 6px 10px;
-  }
-  
-  .desktop-icons-container {
-    display: flex;
-  }
-  
-  .desktop-icons {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .desktop-icons .desktop-icon {
-    width: 115px;
-    height: 100px;
-    color: #fff;
-    text-align: center;
-    background: no-repeat center top;
-    padding-top: 55px;
-    margin: 10px;
-  }
-  
-  
-  .desktop-icons .desktop-icon.akane {
-    background-image: url(./Members/akanes.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.demise {
-    background-image: url(./Members/demises.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.dismayings {
-    background-image: url(./Members/dadas.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.gothic {
-    background-image: url(./Members/gothic.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.turk {
-    background-image: url(./Members/TuRk.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-  
-  .desktop-icons .desktop-icon.zurf {
-    background-image: url(./Members/zurf.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-
-  .desktop-icons .desktop-icon.earthtoballs {
-    background-image: url(./Members/sha.jpg);
-    background-repeat: no-repeat;
-    background-size: 48px 48px;
-  }
-
-  .custom-button {
-    border: none !important;
-  }
-  
   h4 {
-    text-transform: uppercase;
-    font-size: 2px;
-    font-family: "VCR OSD Mono", sans-serif;
-  }
-  
-  .wow {
-    text-transform: uppercase;
-    font-size: 10px;
-    font-family: "VCR OSD Mono", sans-serif;
-  }
-  
-  .draggable {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
-  
-  .enter-screen {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-  
-  }
-  
-  @media only screen and (max-width: 600px) {
-    #enter {
-        background-image: url("./imgs/dawn.png");
-        z-index: 1;
-    }
-  
-    #desktop {
-        background-image: url("./imgs/dawn.png");
-        z-index: 1;
-    }
-  
-    h4 {
-        position: absolute;
-        text-transform: uppercase !important;
-        font-size: 1em !important;
-        font-family: "VCR OSD Mono", sans-serif !important;
-        padding: 60px;
-        width: 70%;
-        text-align: center;
-        top: 0;
-        left: 0;
-        padding-top: 20px;
-        margin-left: 150px;
-        z-index: 0;
-    }
-    .enter-screen {
-        width: 300px;
-    }
-    body {
-      margin: 0;
-      overflow-x: hidden;
-    }
-  }
-  
-  .volume {
-    position: fixed;
-    bottom: 34.5px;
-    right: 0;
-    z-index: -5;
-  }
-  
-  .status-bar {
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .status-bar-field {
+    position: absolute;
+    font-size: 1em !important;
+    padding: 20px;
+    width: 80%;
     text-align: center;
-    width: 25px;
-    height: 25px;
-    line-height: 22px !important;
-    display: inline-block;
+    margin-left: 60px;
   }
+
+  .enter-screen {
+    width: 300px;
+  }
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
